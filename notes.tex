@@ -1,0 +1,1437 @@
+%        File: notes.tex
+%     Created: Tue May 17 09:00 AM 2016 E
+% Last Change: Tue May 17 09:00 AM 2016 E
+%
+\documentclass[10pt]{article}
+
+\usepackage{graphicx}
+\usepackage{braket}
+\usepackage{mdframed}
+\usepackage{bm}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{mathrsfs}
+\usepackage{multicol}
+\usepackage{verbatim}
+\usepackage{dsfont}
+\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
+\usepackage[colorlinks=true,urlcolor=blue,bookmarks=true,citecolor=blue]{hyperref}
+%\usepackage{color}
+%\usepackage[utf8]{inputenc}
+%\usepackage{fourier}
+\usepackage{mathtools}
+\usepackage{todo}
+\usepackage{slashed}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+
+%\usepackage[T1]{fontenc}
+%\usepackage[euler-digits,small]{eulervm}
+%\usepackage[sc,osf]{mathpazo}
+
+\oddsidemargin -0.04cm \evensidemargin -0.04cm
+\setlength{\topmargin}{-0.5in} \textwidth 16.59cm \textheight 23cm 
+
+%\usepackage{geometry}
+%\geometry{
+%letterpaper,
+%lmargin=1cm,
+%rmargin=2cm,
+%tmargin=2cm,
+%bmargin=2cm,
+%footskip=12pt,
+%headheight=12pt}
+
+\newcommand{\iden}{\mathds{1}}
+
+\newcommand{\bZ}{\mathbb Z}
+\newcommand{\bN}{\mathbb{N}}
+\newcommand{\bQ}{\mathbb{Q}}
+\newcommand{\bR}{\mathbb{R}}
+\newcommand{\bC}{\mathbb{C}}
+\newcommand{\PH}{\mbb P\ms H}
+\newcommand{\tat}{\text}
+\newcommand{\ti}{\to\infty}
+\newcommand{\mc}{\mathcal}
+\newcommand{\ms}{\mathscr}
+\newcommand{\mf}{\mathfrak}
+\newcommand{\mbb}{\mathbb}
+\newcommand{\cnj}{\overline}
+\newcommand{\veps}{\varepsilon}
+\newcommand{\sg}{\sigma}
+
+\newcommand{\restr}{\upharpoonright}
+\newcommand{\FR}[2]{\frac{#1}{#2}}
+\newcommand{\PFR}[2]{\left(\frac{#1}{#2}\right)}
+\newcommand{\SFR}[2]{\sqrt{\frac{#1}{#2}}}
+\newcommand{\PP}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\dsum}{\oplus}
+\newcommand{\ten}{\otimes}
+\newcommand{\non}{\nonumber}
+
+\newcommand{\Align}[1]{\begin{align*}#1\end{align*}}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section] 
+\newtheorem{lemma}[theorem]{Lemma}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\newtheorem{defn}{Definition}
+\newtheorem{prop}{Proposition}
+\newtheorem{conjecture}{Conjecture}
+\newtheorem{example}{Example}
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{note}{Note}
+\newtheorem{case}{Case}
+\newtheorem*{claim}{Claim}
+
+\DeclareMathOperator{\spec}{Spec}
+\DeclareMathOperator{\Card}{card}
+\DeclareMathOperator{\Span}{span}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\real}{Re}
+\DeclareMathOperator{\diam}{diam}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\PGL}{PGL}
+\DeclareMathOperator{\SL}{SL}
+\DeclareMathOperator{\SO}{SO}
+\DeclareMathOperator{\SU}{SU}
+\DeclareMathOperator{\Det}{Det}
+\DeclareMathOperator{\Tr}{Tr}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\Map}{Map}
+\DeclareMathOperator{\Stab}{Stab}
+\DeclareMathOperator{\rP}{P}
+\DeclareMathOperator{\rT}{T}
+
+\def\sm{\setminus}
+\def\seq{\subseteq}
+\def\ii{\item}
+\def\bE{\begin{enumerate}}
+\def\eE{\end{enumerate}}
+\def\bP{\begin{pmatrix}}
+\def\eP{\end{pmatrix}}
+
+\renewcommand{\empty}{\varnothing}
+\newcommand{\hv}[1]{\hat{\textbf{#1}}}
+\newcommand{\oti}[2]{#1_{#2=1}^\infty}
+\newcommand{\lam}{\lambda}
+\newcommand{\om}{\omega}
+\newcommand{\Om}{\Omega}
+\newcommand{\gam}{\gamma}
+\newcommand{\di}{\partial}
+
+\newcommand{\fs}{\slashed}
+
+\newcommand{\ha}{\hat a}
+\newcommand{\had}{\hat a^\dagger}
+
+\newcommand{\Question}{\textbf{Question: }}
+\newcommand{\Solution}{\textbf{Solution: }}
+\newcommand{\const}{\textrm{const}}
+
+\newcommand{\colr}[1]{ {\color{red}  #1 } }
+\newcommand{\colb}[1]{ {\color{blue} #1 } }
+\newcommand{\colnb}[1]{ {\color{NavyBlue} #1 } }
+\newcommand{\colm}[1]{ {\color{Fuchsia} #1 } }
+
+\begin{document}
+\date{}
+\title{}
+\author{}
+
+
+\section{ Relativistic Quantum Mechanics }
+%
+
+\subsection{Summary}
+\begin{enumerate}
+    \item Quantum Mechanics: Axioms of QM: Hilbert spaces, rays, measurements.
+    \item Symmetries
+        \begin{itemize}
+            \item How does one relate the states that $\ms O$ measures with the states that $\ms O'$ measures?
+            \item Wigner's theorem: ``For any probability-preserving transformation, is either unitary and linear, or antiunitary and antilinear.'' 
+            \item Trivial symmetry, $U=\iden$. Continuity: symmetries in the path-connected component of $\iden$ are all unitary and linear. 
+            \item Infinitesimally close to $\iden$: ``generators'' $\iff$ ``observables''.
+            \item Representations, projective representations, superselection rules.
+            \item Connected Lie groups and applications: Lie algebras and Abelian Lie groups.
+        \end{itemize}
+    \item Quantum Lorentz Transformations: Unitary representations of Lorentz Group.
+        \begin{itemize}
+            \item Define: (in)homogeneous, orthochronous. 
+            \item Exercise: when working on the Lie algebra level, why is it okay to work with the homogeneous Lorentz group?
+        \end{itemize}
+    \item Poincar\'e algebra: the section where we do Lie algebra computations.
+        \begin{itemize}
+            \item Work infinitesimally away from identity, staying inside of the homogeneous Lorentz group.
+            \item Compute commutators.
+        \end{itemize}
+    \item One Particle States: Representations of inhomogeneous Lorentz group (ie. Poincar\'e group).
+        \begin{itemize}
+            \item Reps of Poincar\'e $\leftrightarrow$ Reps of $\SL(2,\bC)$ %(\colr{Do we do them following Weinberg or apply structure theorems from Lie Groups course?})
+            \item Orbit Method!
+            \item Normalization of free particle states $N(p) = \SFR{k^0}{p^0}$.
+            \item Proof Mass Positive Definite, Proof Mass Zero (Helicity).
+        \end{itemize}
+    \item Space Inversion and Time Reversal
+        \begin{itemize}
+            \item What are the operators corresponding to $\ms P,\ms T$ which act on the Hilbert space?
+            \item If so, what are the properties of $\bm P, \bm{T}$?
+            \item Casework: $M>0, M=0$ with $\bm P, \bm T$.
+        \end{itemize}
+    \item Projective Representations
+        \begin{itemize}
+            \item When are projective reps necessary? Answer: We can
+                set the phase $\phi=\phi(T,\bar T) \to 0$ if the there
+                are no \emph{central charges} in the Lie algebra and
+                the group is simply connected.
+            \item Define central charges, prove theorem (see appendix 2).
+            \item That is: one algebraic condition, one topological
+                condition. Investigate both to show that
+                inhomogeneous Lorentz group it is \emph{not} simply
+                connected!
+            \item Discuss: intrinsic projective representations,
+                superselection rules, spin.
+        \end{itemize}
+    \item Appendix A: Wigner's Theorem (see Dan Freed's article)
+    \item Appendix B: Group Operators and Homotopy Classes (for Projective Reps)
+    \item Appendix C: Inversions and Degenerate Multiplets
+        \begin{itemize}
+            \item ``Inversions might act in more complicated ways on
+                degenerate multiplets of one-particle states''
+            \item Discuss the cases for both $\bm P$ and $\bm T$.
+        \end{itemize}
+\end{enumerate}
+
+\subsection{Symmetries} \label{section:symmetries}
+Before getting started we need to do a digression on quantum foundations.
+This will establish the need for theorems like Wigner's theorem on unitary
+and antiunitary operators, projective representations, etc. \emph{Physical
+states} will be restricted to rays in a separable Hilbert space, so our
+configuration space is given by the projective Hilbert space: \(\mbb P
+\ms H = \ms H\sm\{0\}/\sim\). One way to work with this projective Hilbert
+space is to choose representatives from each ray. %% incomplete transition
+
+Probabilities of certain measurement processes are given by amplitudes of
+projections: \[\Pr[\Psi \to \Psi_n] = |\braket{\Psi_n|\Psi}|^2.\]
+
+Two observers may measure the same physical system in different ways using
+the same Hilbert space. The transformations that take one observer's ray to
+the other must preserve probabilities: \[ \Pr[\ms R \to \ms R_n] = \Pr[\ms
+R'\to\ms R_n'].\]
+\begin{theorem}[Wigner 1930]\label{th:Wigner1930} Any probability
+preserving transformation on a projective Hilbert space can be lifted to
+either a unitary and linear operator or an antiunitary and conjugate-linear
+operator on the original Hilbert space.
+\end{theorem}
+\begin{proof}(Sketch following Weinberg). Given a transformation of
+projective Hilbert space \(T\colon \PH\to\PH\), we must construct an operator
+\(U\colon \ms H \to\ms H\). We choose an orthonormal basis \(\Psi_n\) on
+\(\mc H\) and we scale the image of this basis by phases to ensure the
+result. More precisely, the key step in the proof is to define an new
+basis \(\{\Upsilon_k = \FR{1}{\sqrt 2}\left( \Psi_k+\Psi_1
+\right)\}_{k>1} \cup \{\Upsilon_1 = \Psi_1\}\) and choosing
+\(U\Upsilon_k = \FR{1}{\sqrt 2}\left( U\Psi_k + U\Psi_1 \right).\)
+This provides a constraint: if \(\Psi = \sum_{n=1}^\infty C_n\Psi_n\)
+maps to \(U\Psi = \sum_{n=1}^\infty C_n' U\Psi_n\) then: \[|C_n|^2 =
+|C_n'|^2,\qquad\qquad |C_k+C_1|^2 = |C_k'+C_1'|^2.\] These two
+equations imply \(C_k/C_1 = C_k'/C_1'\) or \(C_k/C_1 = (C_k'/C_1')^*\)
+which corresponds to unitary or antiunitary.  After choosing
+\(C_1=C_1'\) or \(C_1=C_1'^*\), the proof proceeds to verify that the
+operator \(U\) constructed in this way is well-defined,
+unitary/antiunitary, and linear/conjugate-linear.
+\end{proof}
+
+\subsubsection{Representations}
+Let \(G\) be a group of symmetries of our physical system. Mathematically,
+we ask that this is a probability-preserving group action on $\PH$.
+In particular, any element \(g\in G\) induces a transformation on the
+projective Hilbert space which, using Wigner's theorem~\ref{th:Wigner1930},
+corresponds to an operator on the Hilbert space \(U(g)\colon \ms H \to \ms
+H.\) However, this assignment \(U\colon G \to \GL(\ms H)\) is not necessarily
+a unitary or antiunitary representation; but rather a \textbf{projective
+representation}. Indeed, fix a norm-one basis element \(\Psi_n\) and
+consider the action of \(U_1U_2 \coloneqq U(g_1)U(g_2)\) and
+\(U_{12}\coloneqq U(g_1g_2)\). Since the operators \(U_1,U_2,U_{12}\)
+by construction descend to operators on $\PH$, this means that
+\[U_1U_2\Psi_n = e^{i\phi_n(T_1,T_2)}U_{12}\Psi_n.\]
+
+There is a subtlety involved in this: does the phase depend on the
+choice of state $\Psi_n$? If we are able to prepare
+superpositions of states \(\Psi + \Phi\) for any \(\Psi\) and \(\Phi\) then
+it's easy to show that the phase in the projective representation is
+independent of the basis element \(\Psi_n\). However, the ability to
+construct superpositions may be prohibited by the choice of group that
+we pick. This restriction is what is known as \textbf{superselection
+rules}~\cite{WWW52}. If it turns out that we are indeed able to make a
+certain linear combination that is not allowed by superselection
+rules, this simply means that we need to slightly enlarge our group.
+See the following section on projective representations for more
+details.
+
+If the group is Abelian, which is the case for space-time translations or
+rotations around a fixed axis, then every unitary transformation is given
+by the exponential: \[U(T(\theta)) = U(T(\theta/N))^N = \lim_{N\to\infty}
+\left[ 1+\FR{it_a\theta^a}{N} \right]^N = e^{it_a\theta^a}.\]
+ 
+
+\subsection{Projective Representations (Weinberg Vol I \S 2.7)}
+
+\begin{comment}
+    \subsubsection{Mathematical interlude}
+    Projective representations may be thought of as maps $\rho:G\to
+    \PGL(V)$ where $\PGL(V) = \GL(V)/\mbb C$. Since we still are
+    interested in operators on $V$, our Hilbert space, the question
+    becomes: ``Can we lift $\rho:G\to\PGL(V)$ to a representation
+    $\tilde\rho:G\to \GL(V)$?'' There is a very good answer to this
+    question and it involves two gadgets: central extensions and group
+    cohomology.
+
+    \begin{itemize}
+        \item ``Can we lift $\rho:G\to\PGL(V)$ to a representation $\tilde\rho:G\to \GL(V)$?'' 
+
+    In general, no. 
+
+    \item ``What is the obstruction?''
+
+    The gadget $H^2(G,V)$\footnote{Perhaps we should think of this as an
+    analogue of differential 2-forms $\alpha$ for which $d\alpha\ne0$.} is
+    a vector space that determines whether or not there are non-trivial
+    projective representations of $G$.  
+
+    \item ``Anything else interesting?''
+        \begin{itemize}
+            \item Central extensions classified by $H^2(G,V)$.
+            \item Projective representations $\leftrightarrow$ central
+                extensions.
+            \item If it's not possible to lift $G\to\PGL(V)$ to
+                $G\to\GL(V)$, it is possible to lift to $N\rtimes G
+                \to\GL(V)$.
+        \end{itemize}
+
+    \end{itemize}
+
+
+
+    \pagebreak 
+\end{comment}
+
+\begin{comment}
+
+\subsubsection{Weinberg's Discussion}
+
+Recall that all of our representations will be unitary.
+\begin{defn}
+    A \textbf{projective representation} of a group $G$ is a map
+    $\rho : G \to U(V)$ such that
+    \begin{align}
+        \rho(T_1T_2) = e^{i\phi(T_1,T_2)} \rho(T_1) \rho(T_2). 
+        \label{eqn:projrep}
+    \end{align} 
+\end{defn}
+Imposing associativity, $\rho(T_1)(\ \rho(T_2)\rho(T_3)\ ) = (\
+\rho(T_1)\rho(T_2)\ )\rho(T_3)$ gives a necessary condition for the
+phase $\phi$ to satisfy.
+\begin{align*}
+    \rho(T_1T_2T_3)
+    &= e^{i\phi(T_1,T_2T_3)}\rho(T_1)\rho(T_2T_3)
+     = e^{i\phi(T_1,T_2T_3)+i\phi(T_2,T_3)}\rho(T_1)\rho(T_2)\rho(T_3)\\
+    &= e^{i\phi(T_1T_2,T_3)}\rho(T_1T_2)\rho(T_3)
+     = e^{i\phi(T_1T_2,T_3)+i\phi(T_1,T_2)}\rho(T_1)\rho(T_2)\rho(T_3).
+\end{align*}
+This gives the condition:
+\begin{align}
+    \phi(T_1,T_2T_3) + \phi(T_2,T_3) \equiv \phi(T_1T_2,T_3)+\phi(T_1,T_2) \pmod{2\pi}
+    \label{eqn:phasecocycle}
+\end{align}
+\begin{example}[Trivial phase] \label{example:trivialphase}
+    If the phase $\alpha(T_1,T_2)$ is defined by $\alpha(T_1,T_2) =
+    f(T_1T_2) - f(T_1) - f(T_2)$, then this $\alpha$ satisfies
+    \eqref{eqn:phasecocycle}. This is called a trivial phase because,
+    by multiplying the projective representation $\rho(T)$ by
+    $e^{i\alpha(T)}$ we obtain linear representation $\tilde\rho =
+    \rho\cdot e^{i\alpha}$, such that $\tilde\rho(T_1T_2) =
+    \tilde\rho(T_1)\tilde\rho(T_2)$.
+\end{example}
+\begin{defn}
+    Denote by $\Map(G\times G,\bR/2\pi\bZ)$ the set of all phases
+    $\phi:(T_1,T_2)\mapsto [0,2\pi]$. 
+    A \textbf{2-cocycle} is an element of the group $\Map(G\times
+    G,\bR/2\pi\bZ)/\sim$ where $\phi \sim \psi$ if $\phi-\psi$
+    has the form of Example~\ref{example:trivialphase}.
+    The trivial 2-cocycle is given by the equivalence class containing
+    the $\phi\equiv0$ phase. 
+\end{defn}
+
+\begin{remark}
+    Consider a finite dimensional connected Lie group $G$, with $\dim
+    G = d$. Choose coordinates $\{\theta^a\}_{a=1}^d$ centred at the
+    identity of $G$, or more precisely, $f:U\seq\bR^d\to G$ will be the
+    chart near the identity for some open set $U$ containing $0$.
+    %
+    Assume that $\phi\in\Map(G\times G,\bR/2\pi\bZ)$ is at least two
+    times continuously differentiable at $0$ and let's consider what
+    happens when we perturb $\phi$ away from the point
+    $(\iden,\iden)\in G\times G$.
+    %%%
+
+    With this parameterization, we can pull back $\phi:G\times G\to
+    \bR/2\pi\bZ$ to a map $f^*\phi:\bR^d\times \bR^d \to \bR/2\pi\bZ$:
+    \[ f^*\phi(\theta,\bar\theta) \coloneqq \phi(\ T(\theta),T(\bar\theta)\ ). \]
+    Since $f^*\phi(\theta,0) = f^*\phi(0,\bar\theta) = \iden$, it
+    follows that $\di_\theta(f^*\phi)=\di_{\bar\theta}(f^*\phi)=0$,
+    moreover $f^*\phi(0,0) = \phi(\iden,\iden) = 0$ which means that
+    the Taylor expansion starts at least at second order:
+    \[ \phi(\ f(\theta),f(\bar\theta)\ ) = f^*\phi(\theta,\bar\theta)
+    = \phi_{ab}\theta^a\bar\theta^b+\cdots\qquad\text{where}\; \phi_{ab}\in\bR.\]
+
+    
+    %
+    Let us substitute this Taylor series into equation~\eqref{eqn:projrep}:
+    \begin{align*}
+        \rho(\ f(\theta)f(\bar\theta)\ ) &= e^{if^*\phi(\theta,\bar\theta)} \rho(f(\theta))\,\rho(f(\bar\theta))\\
+        LHS 
+        &= \rho(\ (\iden+(\di_a f)t_a+\cdots)(\iden+(\di_b f)t_b+\cdots)\ )\\
+        &= \rho(\ (\iden+(\di_a f)t_a+\cdots)(\iden+(\di_b f)t_b+\cdots)\ )\\
+    \end{align*}
+
+\end{remark}
+
+\pagebreak 
+\end{comment}
+
+\subsubsection{Introduction}
+
+Recall that all of our representations will be unitary.
+\begin{defn}
+    A \textbf{projective representation} of a group $G$ is a map
+    $\rho : G \to U(V)$ such that
+    \begin{align}
+        \rho(T_1T_2) = e^{i\phi(T_1,T_2)} \rho(T_1) \rho(T_2). 
+        \label{eqn:projrep1}
+    \end{align} 
+\end{defn}
+Imposing associativity, $\rho(T_1)(\ \rho(T_2)\rho(T_3)\ ) = (\
+\rho(T_1)\rho(T_2)\ )\rho(T_3)$ gives a necessary condition for the
+phase $\phi$ to satisfy.
+\begin{align*}
+    \rho(T_1T_2T_3)
+    &= e^{i\phi(T_1,T_2T_3)}\rho(T_1)\rho(T_2T_3)
+     = e^{i\phi(T_1,T_2T_3)+i\phi(T_2,T_3)}\rho(T_1)\rho(T_2)\rho(T_3)\\
+    &= e^{i\phi(T_1T_2,T_3)}\rho(T_1T_2)\rho(T_3)
+     = e^{i\phi(T_1T_2,T_3)+i\phi(T_1,T_2)}\rho(T_1)\rho(T_2)\rho(T_3).
+\end{align*}
+This gives the condition:
+\begin{align}
+    \phi(T_1,T_2T_3) + \phi(T_2,T_3) \equiv
+    \phi(T_1T_2,T_3)+\phi(T_1,T_2) \pmod{2\pi}
+    \label{eqn:phasecocycle1}
+\end{align}
+
+The following example and definition is to make precise the meaning of
+equivalent representations.
+\begin{example}[Trivial phase] \label{example:trivialphase1}
+    If the phase $\alpha(T_1,T_2)$ is defined by $\alpha(T_1,T_2) =
+    f(T_1T_2) - f(T_1) - f(T_2)$, then this $\alpha$ satisfies
+    \eqref{eqn:phasecocycle1}. This is called a trivial phase because,
+    by multiplying the projective representation $\rho(T)$ by
+    $e^{i\alpha(T)}$ we obtain linear representation $\tilde\rho =
+    \rho\cdot e^{i\alpha}$, such that $\tilde\rho(T_1T_2) =
+    \tilde\rho(T_1)\tilde\rho(T_2)$.
+\end{example}
+%
+\begin{defn}
+    Denote by $\Map(G\times G,\bR/2\pi\bZ)$ the set of all phases
+    $\phi:(T_1,T_2)\mapsto [0,2\pi]$. 
+    A \textbf{2-cocycle} is an element of the group $\Map(G\times
+    G,\bR/2\pi\bZ)/\sim$ where $\phi \sim \psi$ if $\phi-\psi$
+    has the form of Example~\ref{example:trivialphase1}.
+    The trivial 2-cocycle is given by the equivalence class containing
+    the $\phi\equiv0$ phase. 
+\end{defn}
+
+\begin{remark}
+    At this point we shall make a deal with the devil, but only once
+    in this section: let us identify $\mf g$ with $G$. This can be
+    done in a neighbourhood of the identity using the exponential
+    map, but our deal will consist applying Taylor's formula
+    na\"ively. We do this only for clarity's sake.
+\end{remark}
+
+Let $\vec\theta = (\theta^1,\dots) \equiv \{\theta^a\}$ parameterize
+the group elements $T(\theta)$ near the identity. We must express the
+following statements on the level of the Lie algebra: group
+multiplication, representation, phase.
+%
+Applying Taylor's formula, we find constants $f^a_{\ bc}$,
+%
+\begin{align}
+\rho (T(\theta))        &= \iden + i\theta^a\mf t_a + \FR{1}{2}\theta^b\theta^c\mf t_{bc} + \cdots\\
+f^a(\theta,\bar\theta)  &= \theta^a + \bar\theta^a + f^a_{\ bc}\theta^b\bar\theta^c + \cdots\\
+\phi(\theta,\bar\theta) &= \phi_{bc}\theta^b\bar\theta^c + \cdots
+\label{}
+\end{align}
+
+Let's substitute these three equations to get the infinitesimal
+equivalent of $\rho(T_1)\rho(T_2) = e^{i\phi(T_1,T_2)}\rho(T_1T_2)$:
+\begin{align}
+\rho(T(\theta))\rho(T(\bar\theta)) &=
+e^{i\phi(T(\theta),T(\bar\theta))}\rho(T_{f(\theta,\bar\theta)})\\
+%
+(\iden + i\theta^a\mf t_a + \FR{1}{2}\theta^b\theta^c\mf t_{bc})
+(\iden + i\bar\theta^a\mf t_a + \FR{1}{2}\bar\theta^b\bar\theta^c\mf t_{bc})
+&=
+(1 + i\phi_{bc}\theta^b\bar\theta^c)
+(\iden + if^a\mf t_a + \FR{1}{2}f^b f^c\mf t_{bc})\\
+&=
+(1 + i\phi_{bc}\theta^b\bar\theta^c)
+\biggl[\iden + i(\theta^a+\bar\theta^a+f^{a}_{\ bc}\theta^b\bar\theta^c)\mf t_a\\
+&\qquad\qquad\qquad\qquad
++\FR{1}{2}(\theta^b+\bar\theta^b) (\theta^c+\bar\theta^c)\mf t_{bc}\biggr]
+\end{align}
+The $\theta,\bar\theta,\theta\theta,\bar\theta\bar\theta$ terms are
+equal on both sides, up to second order. Let's look at the
+$\theta\bar\theta$ terms on both sides:
+\begin{align}
+    LHS_{\theta\bar\theta} &= (-\mf t_b\mf t_c)\theta^b\bar\theta^c\\
+    RHS_{\theta\bar\theta} &= (if^{a}_{\ bc}\mf t_a + \mf t_{bc} + i\phi_{bc}\iden )\theta^b\bar\theta^c\\
+    \implies\qquad
+    \mf t_{bc} &= -\mf t_b\mf t_c - if^{a}_{\ bc} - i\phi_{bc}\iden
+\end{align}
+By our choice of $\mf t_{bc}$ being symmetric with respect to $b,c$,
+we have an additional relation $\mf t_{bc} = \mf t_{cb}$. Rearranging
+we easily get:
+\begin{align}
+    [\mf t_b,\mf t_c] &= -i(f^a_{\ bc} - f^a_{\ cb})\mf t_a + i(\phi_{bc}-\phi_cb)\\
+    &= iC^{a}_{\ bc}\mf t^a + iC_{bc}\iden
+\end{align}
+\begin{defn} When we have a linear representation, ie. $\phi(T_1,T_2)
+    = 0$ for all $T_1,T_2$, then $C^{a}_{\ bc}$ completely define the
+    Lie algebra and are called the \textbf{structure constants}.
+    When $\phi$ is non-zero, then the $C_{bc}$'s are called the
+    \textbf{central charges}.
+\end{defn}
+
+\subsubsection{Sufficient Conditions: Turning 
+Projective Representations into Affine Representations}
+
+The key relation that we have come to is $[\mf t_b,\mf t_c] =
+iC^{a}_{\ bc}\mf t^a + iC_{bc}\iden$. A necessary condition of the
+generators of a Lie algebra to satisfy is the Jacobi identity. These
+will lead to a pair of equations. Combining this with a topological
+condition we shall arrive at a theorem which gives sufficient
+conditions which allow making projective representations into linear
+representations.
+
+\newcommand{\mt}{\mf t}
+Let us denote $cyc$ to be the cyclic permutation of $(a,b,c)$ in that order.
+The Jacobi identity reads:
+%   \begin{align*}
+%   [\mt_a,[\mt_b,\mt_c]]+ [\mt_b,[\mt_c,\mt_a]]+ [\mt_c,[\mt_a,\mt_b]]&=0\\
+%   [\mt_a,iC^d_{\ bc}\mt_d + i C_{bc}\iden]+
+%   [\mt_b,iC^d_{\ ca}\mt_d + i C_{ca}\iden]+
+%   [\mt_c,iC^d_{\ ab}\mt_d + i C_{ab}\iden]&=0\\
+%       iC^d_{\ bc}[\mt_a,\mt_d]+ i C_{bc}[\mt_a,\iden]+
+%       iC^d_{\ ca}[\mt_b,\mt_d]+ i C_{ca}[\mt_b,\iden]+
+%       iC^d_{\ ab}[\mt_c,\mt_d]+ i C_{ab}[\mt_c,\iden]&=0\\
+%   iC^d_{\ bc}[\mt_a,\mt_d]+
+%   iC^d_{\ ca}[\mt_b,\mt_d]+
+%   iC^d_{\ ab}[\mt_c,\mt_d]&=0\\
+%       iC^e_{\ bc}(iC^e_{\ ad}t_e+ i C_{ad}\iden)+
+%       iC^e_{\ ca}(iC^e_{\ bd}t_e+ i C_{bd}\iden)+
+%       iC^e_{\ ab}(iC^e_{\ cd}t_e+ i C_{cd}\iden)&=0\\
+%   \end{align*}
+\begin{align*}
+[\mt_a,[\mt_b,\mt_c]]+ cyc &= 0\\
+[\mt_a,iC^d_{\ bc}\mt_d + i C_{bc}\iden]+ cyc &= 0\\
+    iC^d_{\ bc}[\mt_a,\mt_d]+ i C_{bc}[\mt_a,\iden]+ cyc &= 0\\
+iC^d_{\ bc}[\mt_a,\mt_d] + cyc &=0\\
+    iC^d_{\ bc}(iC^e_{\ ad}\mt_e+ i C_{ad}\iden)+ cyc &=0
+\end{align*}
+The coefficient of $\mf t_e$ and $\iden$ must be zero, which gives the
+following two relations:
+\begin{align*}
+    0 &= C^d_{\ bc}C^e_{\ ad} + cyc = 
+    C^d_{\ bc}C^e_{\ ad} + C^d_{\ ca}C^e_{\ bd} + C^d_{\ ab}C^e_{\ cd}\\
+    0 &= C^d_{\ bc}C_{\ ad} + cyc = 
+    C^d_{\ bc}C_{ad} + C^d_{\ ca}C_{bd} + C^d_{\ ab}C_{cd}
+\end{align*}
+There is an immediate way to reduce the second equation to the first:
+set $C_{ab} = C^{e}_{\ ab}\phi_e$ for some choice of $\phi_e$. In
+particular, shifting $\mt_a\to\tilde\mt_a = \mt_a + \phi_a\iden$ we get:
+\begin{align*}
+    [\tilde\mt_a,\tilde\mt_b]
+&= [\mt_b + \phi_b\iden,\mt_c+\phi_c\iden] = [\mt_b,\mt_c]
+%&= iC^{a}_{\ bc}\mt_a + iC_{bc}\iden\\
+= iC^{a}_{\ bc}\mt_a + iC^{a}_{bc}\phi_a\iden
+= iC^{a}_{\ bc}\tilde\mt_a
+\end{align*}
+
+\begin{theorem}
+    Let $\rho:G\to U(V)$ be a projective representation with $\dim G <
+    \infty$. If there is a choice of generators $\{\mt_a\}\seq \mf
+    u(V)$ that may be extended to a Lie-algebra basis on $\mf u(V)$,
+    that is the $\{\mt_a\}$ do not give rise to central charges, and
+    if $G$ is simply connected, then we may ``choose phases of the
+    operators to obtain a linear representation.''
+\end{theorem}
+
+\renewcommand{\th}{\theta}
+\begin{proof}{\ }
+    Weinberg's proof is clear. Here is an outline of his exposition.
+    What do we want? A linear representation. How will we get one? By
+    brute force: writing down a differential equation that the
+    `representation operators' must satisfy, finding the properties of
+    such operators, show that they form a linear representation. It's
+    quite fun actually.
+    \begin{comment}
+    \begin{itemize}
+        \item Recall: construction of $\rho(T)$
+    \begin{itemize}
+        \item Choose $\theta$,$f$ so that $T(\th)T(\th')= T(f(\th,\th'))$
+        \item 
+    \end{itemize}
+    \end{itemize}
+    \end{comment}
+\end{proof}
+
+\begin{mdframed}
+    Big Question: If we are given a projective transformation of the
+    inhomogeneous orthochronous Lorentz group, can we redefine the
+    operators to make a \emph{linear} representation?  In other words,
+    can we apply the above theorem to the Lorentz group?
+\end{mdframed}
+
+We need to check the algebraic hypothesis and the topological
+hypothesis: it will turn out that the topological condition fails.
+
+\begin{enumerate}
+    \item (Topological Condition)
+        \begin{enumerate}
+            \item $\bR^{3,1} \xrightarrow{\;\cong\;} \mf u(2,\bC)$
+                \[ V^\mu \mapsto v = V^\mu\sg_\mu = \bP V^0+V^3 & V^1
+                - iV^2 \\ V^1+iV^2 & V^0 - V^3 \eP\]
+            \item Let $\lam\in\mf{gl}(2,\bC)$, with $|\det\lam|=1$.
+                \begin{align*}
+                    v &\to \lam v \lam^\dag   & 
+                    V^\mu\sg_\mu \to 
+                    \lam V^\mu\sg_\mu \lam^\dag = 
+                    (\Lambda^\mu_\nu(\lam) V^\nu)\sg_\mu
+                \end{align*}
+                where there is a unique $\Lambda(\lam)$ since $V^\mu
+                V_\mu = -\det v$ and since conjugation by $\lam$
+                (having $|\det\lam|=1$) perserves the inner product.
+            \item Property: $\Lambda(\lam)\Lambda(\lam') = \Lambda(\lam\lam')$.
+            \item Property: If $\lam' = e^{i\theta}\lam$, then
+                conjugation by $\lam$ and $\lam'$ is equivalent.
+                Therefore we have an induced action of $\SL_2(\bC)$ on
+                $\bR^{3,1}$.
+            \item Property: if $\lam\in\SL_2(\bC)$, then
+                $-\lam\in\SL_2(\bC)$ and produces the same Lorentz
+                transformation.
+                \begin{prop}
+                    $\ms L \cong \SL_2(\bC)/\bZ_2$, where $\ms L$ is
+                    the homogeneous Lorentz group.
+                \end{prop}
+            \item Topology of $\SL_2(\bC)$: Polar Decomposition.
+                For any $\lam\in\SL_2(\bC)$, there exist unique $u\in
+                U(2)$, $h\in i\mf u(2) = \mathrm{Hermitian}(2)$, such
+                that $\lam = u e^{h}$. Exercise: since $\lam \in
+                \SL_2(\bC)$ show that: 
+                \[ u\in \SU(2), \qquad \Tr h = 0. \]
+                Traceless, Hermitian matrices can be written uniquely
+                as $n\cdot\vec \sg$ where $\vec\sg$ are the Pauli
+                matrices; $\SU(2)\cong S^3$, the 3-sphere.  Therefore:
+                \begin{align*}
+                \SL_2(\bC)&\xrightarrow{\;homeo.\;}\bR^3\times S^3\\
+\text{homogeneous Lorentz group}&\xrightarrow{\;homeo.\;}
+    \bR^3\times (S^3/\bZ^2) \cong \bR^3\times \bR\rm P^2\\
+\text{inhomogeneous Lorentz group}&\xrightarrow{\;homeo.\;}
+   \bR^4 \times \bR^3\times (S^3/\bZ^2) \cong \bR^7\times \bR\rm P^2\\
+                \end{align*}
+        \end{enumerate}
+
+    \item (Algebraic Condition)
+
+        %%%%
+        Fun fact (only applicable to subgroup of inhom. Lorentz
+        group, the $\{J^{\mu\nu}\}'s$):
+        \begin{prop}
+            A semi-simple Lie algebra allows no central charges.
+            (Remember: central charges are properties of the Lie
+            algebra of the target space of a representation.)
+        \end{prop}
+        This proposition does \textbf{\emph{NOT}} apply to the entire
+        Lorentz group.
+\end{enumerate}
+
+Combining the topological description of the inhomogeneous Lorentz
+group and the proof of the theorem we may conclude that the phase can
+\emph{almost} be eliminated. In fact, since the fundamental
+group, $\pi_1(\text{inhom.  Lorentz group}) = \bZ_2$, we may conclude
+that ``because the double loop that goes twice from $1$ to $\Lambda$
+to $\Lambda\bar\Lambda$ and then back to $1$ \emph{can} be contracted
+to a point, so we must have \[\left[ U(\Lambda)U(\bar\Lambda)
+U^{-1}(\Lambda\bar\Lambda)\right]^2 = \iden,\] and hence the phase
+$e^{i\phi(\Lambda,\bar\Lambda)} = \pm1$.  Similarly for the
+inhomogeneous group we get the relation: 
+\begin{align}
+    U(\Lambda,a)U(\bar\Lambda,\bar a) = \pm
+    U(\Lambda\bar\Lambda,\Lambda a+\bar a)."
+    \label{eqn:superselectionrestriction}
+\end{align}
+
+\begin{defn}
+    \footnote{Check this: perhaps this interpretation is not correct.}
+    Fix a unitary (possibly projective) representation $U:\ms
+    L \to U(V)$. If $U(\Lambda_1)U(\Lambda_2) =
+    U(\Lambda_1\Lambda_2)$ for all $\Lambda_i\in\ms L$ then the set of
+    vectors $v\in V$ are called integer-spin states. Otherwise, if
+    there exist $\Lambda_1,\Lambda_2$ for which $U(\Lambda_1)
+    U(\Lambda_2) = -U(\Lambda_1\Lambda_2)$, then the $v\in V$ are
+    called a half-integer states.
+\end{defn}
+
+\begin{remark}
+    In fact, in the half-integer case, we know exactly which
+    $\Lambda_1,\Lambda_2$ are problematic: they are precisely the ones
+    for which the path $1\to\Lambda_1\to\Lambda_1\Lambda_2\to1$ is not
+    contractible to a point. 
+    %
+    For concreteness, suppose you have a \emph{massless} state with
+    angular momentum (helicity) $\sg$ in the $z$-direction. After
+    applying a rotation about the $z$-axis, the state will pick up a
+    phase of $e^{2\pi i\sg}$ (check). This distinguishes integer and
+    \mbox{half-integer $\sg$.}
+\end{remark}
+\begin{remark}
+    The restriction \eqref{eqn:superselectionrestriction} imposes the
+    superselection rule: ``we cannot mix integer and half-integer
+    states.'' Let's spell this out in full: suppose $\psi_0$ is an
+    integer-state whereas $\psi_{1/2}$ is half-integer-state.
+    \[ \pm U_{12}(\psi_0 + \psi_{1/2}) = U_1U_2(\psi_0 + \psi_{1/2}) 
+    = U_1U_2\psi_0 + U_1U_2\psi_{1/2} = U_{12}\psi_0 - U_{12}\psi_{1/2}
+    = U_{12}(\psi_0-\psi_{1/2})\]
+    Applying $U_{12}^{-1}$ to both sides we obtain from the leftmost
+    equal to the rightmost expression: $\pm(\psi_0+\psi_{1/2}) =
+    \psi_0-\psi_{1/2}$. This means either $\psi_{1/2}=0$ or
+    $\psi_0=0$, both of which contradict the fact that these should
+    represent physical states.
+\end{remark}
+
+\subsubsection{Covering spaces}
+We have seen that $\SL_2(\bC) \to \ms L$ is a 2-1 covering map.
+\begin{mdframed}[%
+linewidth=2,roundcorner=10pt,leftmargin=20,
+rightmargin=20,backgroundcolor= yellow!40,
+linecolor=blue!70!black,frametitle=Question: What should we call the
+Lorentz group?] 
+    \begin{enumerate}
+            \vspace{-.2cm}
+        \item  Can we be bold and \emph{replace} what we call the
+            Lorentz group ($\SL_2(\bC)/\bZ_2$) with $\SL_2(\bC)$?
+            \vspace{-.2cm}
+        \item If we do this, what do we gain and what do we lose?
+    \end{enumerate}
+\end{mdframed}
+
+\noindent Our conventional Lorentz group, $\SL_2(\bC)/\bZ_2 \cong
+\SO^+(3,1)$, has two features relevant for this discussion:
+\begin{enumerate}
+    \item $\SO^+(3,1)$ admits ``intrinsic'' projective representations.
+    \item Topological structure implies there are two superselection sectors.
+\end{enumerate}
+The group $\SL_2(\bC)$, however, does not admit projective
+representations because it is simply connected and semi-simple. The
+nonexistence of projective representations means that $\SL_2(\bC)$ is
+not able to impose superselection rules. However, the representations
+(apart from being all non-projective) of $\SL_2(\bC)$ are equivalent
+to the original $\SL_2(\bC)/\bZ_2$: which means that the
+\emph{physical consequences} are the same modulo superselection.
+
+To summarize, the only caveat of saying that the Lorentz group is
+$\SL_2(\bC)$ is that we cannot conclude whether or not ``we can prepare
+physical systems in linear combinations of states of integer and
+half-integer spin, but only that the observed Lorentz invariance
+($\SL_2(\bC)$) of nature cannot be used to show that such
+superpositions are impossible.
+
+This procedure applies to any Lie group $G$ that admits central
+charges or is not simply connected. If it has central charges, enlarge
+the group;\footnote{this has not yet been shown in these notes} if it
+is not simply connected, replace $G$ with the covering space. However,
+when we do this replacement we must always remember: we will not be
+able to conclude whether or not all linear combinations are allowed.
+
+To quote Weinberg:
+``In short, the issue of superselection rules is a bit of a red
+herring; \emph{it may or may not be possible to prepare physical
+systems in arbitrary superpositions of states, but one cannot settle
+the question by reference to symmetry principles, because whatever one
+thinks the symmetry group of nature may be, there is always another
+group whose consequences are identical except for the absence of
+superselection rules.}
+
+
+\subsection{Lorentz Transformations}\label{SS:rqm-lorentz}
+In this subsection the relativistic part gets incorporated into our quantum
+mechanical framework. The important equations are highlighted but most
+of the discussion surrounding them is suppressed.
+
+The equation that preserves proper time is given by:
+\begin{align} 
+\eta_{\mu\nu}dx^\mu dx^\nu = \eta_{\alpha\beta}dx'^\alpha dx'^\beta.
+\label{eqn:proper-time}
+\end{align}
+Lorentz transformations are a subgroup of the general linear group
+\(\GL(\bR^4)\) preserving proper time. Rewriting \eqref{eqn:proper-time} as
+\(\eta_{\alpha\beta}\PP{x'^\alpha}{x^\mu} \PP{x'^\beta}{x^\nu} =
+\eta_{\mu\nu}\), we get that:
+\[ \eta_{\alpha\beta}\Lambda^\alpha_{\ \ \mu}\Lambda^\beta_{\ \ \nu} =
+\eta_{\mu\nu}.\]
+Taking the determinant we get \((\Det\Lambda)^2=1\). Another restriction
+comes from considering the \(\Lambda^0_0\) component: \((\Lambda^0_0)^2 = 1
++ \sum_{i=1}^3\Lambda^0_i\Lambda^0_i\) which means \(\Lambda^0_0 \ge 1\) or
+\(\Lambda^0_0 \le -1\). This analysis shows there are at least \textbf{four
+connected components} of the Lorentz group. The $\Det\Lambda=1,
+\Lambda^0_0\ge 1$ is called the proper orthochronous Lorentz group.  
+\begin{theorem} Let $\ms P$ denote a parity transformation: $\ms P^0_{\ \
+0} = 1, \ms P^i_{\ \ i} = -1$ for $i=1,2,3$ and let $\ms T$ denote a
+time-reversal: $\ms T^0_{\ \ 0} = -1$ and $\ms T^i_{\ \ i} = 1$ for
+$i=1,2,3$. Then the Lorentz group is generated by the proper, orthochronous
+Lorentz group and $\ms P, \ms T, \ms P\circ\ms T$.
+\end{theorem}
+\subsubsection{Poincar\'e Algebra}
+The \textbf{Poincar\'e group} is an extension of the Lorentz group to
+include translations: $x'^\mu = \Lambda^\mu_{\ \ \nu} x^\nu + a^\mu$. To
+derive the Lie algebra associated with this group we will consider an
+infinitesimal transformation: \[\Lambda^\mu_{\ \ \nu} = \delta^\mu_\nu +
+\omega^\mu_{\ \ \nu},\qquad\qquad a^\mu = \epsilon^\mu,\] with $\omega,
+\epsilon$ infinitesimal parameters. Imposing that this infinitesimal
+transformation preserves proper-time, we obtain:
+\begin{align*}
+    \eta_{\rho\sg} &= \eta_{\mu\nu}(\delta^\mu_{\ \
+    \rho}+\om^\mu_{\ \ \rho})(\delta^\nu_{\ \ \sg}+\om^\nu_{\ \ \sg})\\
+    &= \eta_{\sg\rho} + \om_{\sg\rho}+\om_{\rho\sg} + O(\om^2)
+\end{align*}
+Which means that $\om$ is an antisymmetric 2-tensor in 4 dimensions.
+The Poincar\'e group is a symmetry of space-time and so if we suppose our
+quantum theory is also invariant under this group then by the
+discussion at the beginning of 
+section \ref{section:symmetries} we must have a unitary operator corresponding to this infinitesimal
+transformation: \[ U(\iden+\omega,\epsilon) = \iden + \FR{1}{2}i\om_{\rho\sg}
+J^{\rho\sg} - i\epsilon_\mu P^\mu.\] Unitarity implies that each component
+of $J$ and $P$ are Hermitian, and antisymmetry of $\om_{\rho\sg}$ implies
+antisymmetry of $J^{\rho\sg}$. The sign in front of $i\epsilon_\mu P^\mu$
+is a convention. %Page 60
+
+
+\subsection{Poincar\'e Algebra}
+The transformation properties of $J^{\mu\nu}$ and $P^\mu$ are obtained by
+considering the equation:
+\[ U(\Lambda,a)U(1+\om,\epsilon)U(\Lambda,a)^{-1} = U(\Lambda', a').\]
+Applying a taylor expansion to both the LHS and RHS we should arrive at a
+transformation law for each $J^{\mu\nu}$ and $P^\mu$. Doing this also
+shows that $\mu,\nu$ are tensor indices.
+
+The commutation relations follow from taking $\Lambda =\iden+\om$.
+
+\subsubsection{Low-Velocity Limit}
+
+\subsection{One-Particle States}
+The Poincar\'e algebra has the following commutation relation:
+$[P^\mu,P^\nu]=0$.  This, in particular, shows that
+$[H,P^\mu]=[P^0,P^\mu]=0$ giving us good quantum numbers $p^\mu$ so we
+shall label our basis states as:  \[ \ket{p,\sg}. \] A priori we don't
+know  if $\sg$ is a discrete index or a continuous one, however we
+take \emph{as part of the definition of a one-particle state} that
+$\sg$ is a discrete index.
+
+However, to define a one-particle state let's not use $\ket{p\sg}$,
+ie.  just a single vector inside some Hilbert space. Let us remember
+that \emph{the state of the particle depends on the observer measuring
+the particle}! Therefore we shall identify the vectors \[\ket{p\sg}
+\sim U(\Lambda)\ket{p\sg} = \sum_{\sg'} C_{\sg'\sg} (\Lambda)
+\ket{p\sg'},\] where the notation $\ket\alpha\sim\ket\beta$ means ``we 
+identify $\ket\alpha$ with $\ket\beta$.'' This motivates:
+\begin{defn} A \textbf{one-particle state} is a finite-dimensional
+    irreducible representation of the Lorentz group.
+\end{defn}
+
+\subsection{Classification of Finite Dimensional Irreducible
+Representations of the Lorentz Group}
+
+Our goal in this section will be to \emph{build} representations of
+the homogeneous orthochronous Lorentz group which we shall denote $\ms
+L$. We will do this explicitly and diligently. A rough outline of the
+procedure is as follows. First, we notice there are a lot of possible
+basis vectors for the Hilbert space $\ms H$. In fact, for each $p\in
+\bR^{3,1}$ there are many \emph{basis} vectors $\ket{p\sg} \in \ms H$.
+Second, to write down a representation we must describe the action of
+each $\Lambda\in\ms L$, or more precisely $U(\Lambda)\in U(\ms H)$, on
+each $\ket{p\sg}$. To accomplish this mighty task we will be even
+mightier: first, we will choose only a small subset of the basis
+vectors and describe the action of $\ms L$; second, we'll extend our
+work to all other basis vectors.
+
+\textbf{Part One: Simplification}
+Let's push ourselves to the inside of the light-cone and restrict to
+$p^2 \le 0$. Here, there are two invariant functions for $\ms L$, the
+\emph{homogeneous, orthochronous} group (draw a picture of the
+light-cone to convince yourself):
+\begin{align*}
+    f(p) &= p^2 = \eta_{\mu\nu}p^\mu p^\nu &
+    g(p) &= \sgn(p^0)
+\end{align*}
+The pictorial proof makes one more result apparent: the action of $\ms
+L$ partitions the inner-light-cone into orbits. Each orbit can be
+classified/described physically. There are three relevant parts that
+are of interest to us, two of which are non-trivial:
+\begin{itemize}
+    \item Massive orbit: $\ms L\cdot (0,0,0,M), M>0$
+    \item Massless orbit: $\ms L\cdot (0,0,\kappa,\kappa),\kappa>0$
+    \item Vacuum: $\ms L\cdot (0,0,0,0)$
+\end{itemize}
+The notation $\ms L \cdot p$ denotes the set $\{\Lambda p\}_{\Lambda
+\in\ms L}$, or in words, the orbit of $p$ under the action of $\ms L$.
+
+For each orbit, we may define a representative $k\in\bR^{3,1}$ from
+which we can generate any other vector in the orbit. In particular, we
+define the map $L_k(p)\in\ms L$ that takes $k$ to $p$, or briefly: $p
+= L(p)k$. These $k$'s will be our building blocks for our
+representation.
+%
+How do we recover the basis vectors $\ket{p\sg}$ from $\ket{k\sg}$?
+Define the state $\ket{p\sg}$ by: \[ \ket{p\sg} \coloneqq N(p)U(L(p))
+\ket{k\sg},\] where $N(p)$ is a phase factor that is important, but
+will be determined later.
+
+\textbf{Part Two: Induction}
+Now we make a little jump, to show that if we have a representation for the
+subspace spanned by $\{\ket{k\sg}\}_{\sg}$ then we can \emph{induce} a
+representation for the subspace corresponding to the orbit of $k$:
+$\{\ket{p\sg} \;|\; p\in(\ms L\cdot k), \sg \}$.
+\begin{align*}
+    U(\Lambda)\ket{p\sg}
+&= N(p)U(\Lambda)U(L_p)\ket{k\sg}\\
+&= N(p)U(L_{\Lambda p})U(L^{-1}_{\Lambda p})U(\Lambda)U(L_p)\ket{k\sg}\\
+&= N(p)U(L_{\Lambda p})U\biggl(\underbrace{L^{-1}_{\Lambda p}\cdot\Lambda\cdot
+L_p}_{W(\Lambda,p)}\biggr)\ket{k\sg}\\
+&= N(p) U(L_{\Lambda p}) \sum_{\sg'} D_{\sg'\sg}(W(\Lambda,p)) \ket{k\sg'}\\
+&= N(p) \sum_{\sg'} D_{\sg'\sg}(W(\Lambda,p)) \FR{\ket{\Lambda
+p,\sg'}}{N(\Lambda p)}\\
+&= \PFR{N(p)}{N(\Lambda p)} \sum_{\sg'} D_{\sg'\sg}(W(\Lambda,p))
+\ket{\Lambda p,\sg'}
+\end{align*}
+Here is a quick explanation of the calculation. The second equality is
+just inserting an identity. The third equality combines the Lorentz
+transformations so that $W(\Lambda,p)$ is a Lorentz transformation
+that fixes $k$ (easy exercise). The fourth line is the application of
+the representation on the $\{\ket{k\sg}\}_{\sg}$ space: \[U(W)
+\ket{k\sg} = \sum_{\sg'} D_{\sg'\sg}(W)\ket{k\sg}.\] The fifth and
+sixth equalities are rearrangements and simplifications. To be
+precise, the representation that we use in the fourth line is a
+representation of the stabiliser group of $k$: \[\Stab(k)=\{W\in\ms
+L\;|\;Wk=k\}\seq\ms L.\] In physics, we call this the ``little
+group''. Notice that there is a different little group depending on
+which representative $k$ we are dealing with.
+
+\subsubsection{Representations of the Massive Little Group}
+There are three orbits of interest and thus three possible little
+groups: massive $k=(0,0,0,M)$, massless $k=(0,0,\kappa,\kappa)$,
+vacuum. The vacuum case is straightforward so let's consider the other
+two cases.
+
+The little group is the stabiliser of $k$. In the massive case, these
+are by inspection $\SO(3)\seq \ms L$ the rotation matrices sitting
+inside the homogeneous orthochronous Lorentz group. The
+representations of $\SO(3)$ can be labelled by $j=0, \FR{1}{2}, 1,
+\dots$; let's denote them as $D^{(j)}_{\sg'\sg}(R)$ where $R \in
+\SO(3)$. The induced representation is given by:
+\[ U(\Lambda)\ket{p\sg} = \FR{N(p)}{N(\Lambda p)} \sum_{\sg'}
+D^{(j)}_{\sg'\sg}(W_{\Lambda,p})\ket{\Lambda p,\sg'}\]
+where $W(\Lambda,p) = L^{-1}_{\Lambda p}\cdot\Lambda \cdot L_p$ can be
+computed explicitly for any $p$ in the same orbit as $k = (0,0,0,M)$.
+Let's not devote the next two sections to the massless case.
+
+\subsubsection{The Massless Little Group: Warm-Up}
+The little group for the massless vector $(0,0,\kappa,\kappa)$ is
+isomorphic to $ISO(2)\cong \bR^2\rtimes \SO(2)$. The proof of this is
+a bit more involved, but since the result is so interesting let's
+reproduce it.
+
+\begin{prop} 
+    Let $k = (0,0,1,1)\in\bR^{3,1}$. If we denote the stabiliser of
+    $k$ by $\Stab(k)\seq\ms L$, then $\Stab(k)\cong ISO(2)$.
+\end{prop}
+\begin{proof}(Weinberg)
+    Fix $W\in \Stab(k)$.  Choose $t = (0,0,0,1)$ to be a time-like
+    vector. Then $Wt$ has the following two properties:
+    \begin{align*}
+        (Wt)^2 &= t^2 = -1 &
+        (Wt)\cdot k &= t\cdot k = -1.
+    \end{align*}
+    Since both $k$ and $t$ have simple forms, it is straightforward to
+    check that $Wt$ has the form:
+    \[ Wt = (\alpha,\beta,\zeta,1+\zeta),\ \ \text{with}\ \
+    \zeta=(\alpha^2+\beta^2)/2\]
+    In particular, $W$ acting on $t$ is equal to the action of a
+    simple Lorentz transformation $S(\alpha,\beta)$:
+    \[ Wt = S(\alpha,\beta) t = 
+        \bP
+        1 & 0     & -\alpha & \alpha \\
+        0 & 1     & -\beta  & \beta  \\
+   \alpha & \beta & 1-\zeta & \zeta  \\
+   \alpha & \beta & -\zeta  & 1+\zeta
+        \eP
+    \bP0\\0\\0\\1\eP\]
+    Finally, this means that $S(\alpha,\beta)^{-1}W = R(\theta)$ is a
+    rotation keeping the $t$ axis invariant. Rearranging we have the
+    decomposition:
+    \[W(\theta,\alpha,\beta)=S_{\alpha,\beta}R_\theta.\]
+    By brute force multiplication, we can look for Abelian subgroups,
+    $S_{\alpha,\beta}S_{\alpha',\beta'} = S_{\alpha+\alpha',\beta+
+    \beta'}$ and $R_\theta R_{\theta'}=R(\theta+\theta')$
+    and also for an isomorphism with $ISO(2)$: $R_\theta S_{\alpha,
+    \beta} R^{-1}_\theta = S(\alpha\cos\theta +\beta\sin\theta,
+    -\alpha\sin\theta+\beta\cos\theta)$.  The last equality shows what
+    an observer $\ms O'$ (who is rotated by an angle $\theta$ from
+    $\ms O$) would measure if $\ms O$ moved an object by a vector
+    $(\alpha,\beta)$.
+\end{proof}
+
+\begin{remark}
+Since $ISO(2)$ contains Abelian subgroups, $ISO(2)$ is not semi-simple.
+\end{remark}
+
+\subsubsection{The Massless Little Group}
+Let's compute $W(\Lambda,p)$. Infinitesimally $W(\theta,\alpha,\beta)
+= \iden + \om$ where 
+\[ \om = 
+    \left( \begin{smallmatrix}
+        0 &  \theta & -\alpha & \alpha \\
+  -\theta &    0    & -\beta  & \beta  \\
+   \alpha &  \beta  &  0 & 0\\
+  -\alpha & -\beta  &  0 & 0
+   \end{smallmatrix} \right)
+   \implies 
+   U(W_{\theta,\alpha,\beta}) = \iden + i\alpha A + i\beta B + i\theta
+   J_3
+\]
+where $A = J_2+K_1$, and $B = -J_1+K_2$. The algebra leads to a
+surprise. The commutator $[A,B]=0$, and $[H,A]=[H,B]=0$ which means
+that we can introduce new quantum numbers: $a,b$ corresponding to
+$A,B$. However by applying a rotation by $\theta$ we get new distinct
+states which are also eigenstates labelled by the same $k$-vector.
+
+Input from experimental observations: massless particles are not
+observed to have a continuous symmetry. We must conclude that
+$\ket{k\sg}$ must vanish under $A$ and $B$. The only remaining
+operator for which we may distinguish $\ket{k\sg}$ is $J_3$ and so we
+write: \[ J_3\ket{k\sg} = \sg\ket{k\sg}. \]
+The value $\sg$ is the magnitude of the angular momentum in the
+direction of $k=(0,0,1,1)$, or more precisely in the $\bm {\hat k}$
+direction. This is called the \textbf{helicity} of the massless
+particle.
+
+\subsubsection{Representations of the Massless Little Group}
+We know, from the Abelian subgroup structure, $U(S_{\alpha,\beta})
+= e^{i\alpha A + i\beta B}$ and $U(R_\theta) = e^{i\theta J_3}$.
+Therefore for any $W=S_{\alpha,\beta}R_\theta$ we may use the
+definition of the representation $U(W) = U(S_{\alpha,\beta})
+U(R_\theta)$ so that by acting on $\ket{k\sg}$ we get: $U(W)
+\ket{k\sg}=e^{i\theta\sg}\ket{k\sg}$. Remember: $A\ket{k\sg} =
+B\ket{k\sg}=0$. Therefore:
+\begin{align*}
+    U(W)\ket{k\sg} &= \sum_{\sg'} D_{\sg'\sg}(W)\ket{k\sg},  &
+    D_{\sg'\sg}(W) &= e^{i\theta\sg}\delta_{\sg'\sg}
+\end{align*}
+Inducing this action to the subspace corresponding to the entire
+orbit, $\ms L \cdot k$, we get:
+\begin{align*}
+    U(\Lambda)\ket{p\sg} &= \FR{N(p)}{N(\Lambda p)} %\sum_{\sg'}
+    e^{i\sg\theta(\Lambda,p)}\ket{\Lambda p,\sg} &
+    W(\Lambda,p)&\equiv L^{-1}_{\Lambda p}\Lambda L_p \equiv
+    S_{\alpha(\Lambda,p),\beta(\Lambda,p)}R_{\theta(\Lambda,p)}
+\end{align*}
+
+\begin{remark} The part of the little group parameterized by
+$\alpha,\beta$ will be responsible for electromagnetic gauge
+invariance. Stay tuned, don't change the channel!
+\end{remark}
+
+\begin{remark} As we saw in our discussion of projective
+representations, the fact that the Lorentz group has $\pi_1(\ms L)
+= \bZ_2$ imposes the constraint that
+$\sg\in\{\dots,-\FR{1}{2},0,\FR{1}{2},1,\dots\}$.  The statment is
+that $\iden\to\Lambda=e^{i(2\pi)J_3} \to\iden$ picks up a phase
+$e^{2\pi i\sg}$ for a state $\ket{k\sg}$. Doing this twice would pick
+up $e^{4\pi i \sg}$. However, the path $\iden\to\Lambda\to \iden \to
+\Lambda \to\iden$ is contractible to a point, which means that
+$e^{4\pi i\sg}=1$ and so $4\pi\sg\equiv 0 \pmod{2\pi}$ or that $\sg$
+is an integer or half-integer.  
+\end{remark}
+
+\begin{remark}
+    Spatial inversion, as we shall see, connects states of helicity
+    that differ by a sign $(-1)$. Electromagnetism and gravitation
+    both are spatially symmetric. Electroweak theory is not spatially
+    symmetric (cf. nuclear beta decay).
+    \begin{align*}
+        \text{ photons}&: \sg = \pm1 &
+      \text{ neutrinos}&: \sg = +1/2\\
+      \text{ gravitons}&: \sg = \pm2&
+  \text{ antineutrinos}&: \sg = -1/2
+    \end{align*}
+\end{remark}
+
+\subsubsection{Polarization}
+
+\begin{prop} Helicity is Lorentz invariant.
+\end{prop}
+\begin{proof} This follows from the induced action:
+$U(\Lambda)\ket{p\sg} = \FR{N(p)}{N(\Lambda p)} 
+e^{i\sg\theta(\Lambda,p)}\ket{\Lambda p,\sg}$.
+\end{proof}
+
+\newcommand{\ap}{\alpha_{\scriptscriptstyle +}}
+\newcommand{\an}{\alpha_{\scriptscriptstyle -}}
+\newcommand{\apm}{\alpha_{\scriptscriptstyle \pm}}
+The above proposition does not mean that the state is the same.
+A general one-photon state is a superposition:
+\[ \ket{p;\alpha} = \ap \ket{p;+1} + \an\ket{p;-1} \]
+We say the photon is
+\begin{itemize}
+    \vspace{-.1cm}
+\item \textbf{elliptically polarized} if $|\apm|\ne0$ and $|\ap| \ne |\an|$, 
+    \vspace{-.3cm}
+\item \textbf{circularly polarized} if only one of $\ap=0$ or $\an=0$,
+    \vspace{-.3cm}
+\item \textbf{linearly polarized} if $|\ap| = |\an|$.
+\end{itemize}
+The relative phase may change as we boost in certain directions.
+
+\subsection{Space Inversion and Time Reversal}
+
+\begin{mdframed}[%
+linewidth=2,roundcorner=10pt,leftmargin=20,
+rightmargin=20,backgroundcolor= yellow!40,
+linecolor=blue!70!black,frametitle=The Fight for a True Representation] 
+Can we enforce $U(\Lambda,a)U(\Lambda',a') = U(\Lambda\Lambda',\Lambda
+a'+a)$ for the entire Poincar\'e group, including the cases when
+parity and time reversal $\ms P$ and $\ms T$ are allowed?
+\end{mdframed}
+
+Suppose there are operators $\rP = U(\ms P,0), \rT = U(\ms T,0)$ 
+satisfying 
+\begin{align}
+\rP U(\Lambda,a)\rP^{-1}&=U(\ms P\Lambda\ms P^{-1},\ms Pa)\label{eqn:parity}\\ 
+\rT U(\Lambda,a)\rT^{-1}&=U(\ms T\Lambda\ms T^{-1},\ms Ta)\label{eqn:timrev}
+\end{align}
+Nuclear beta decay shows that the first of these is only approximate
+and the second seems also approximate (PRL 13 138, 1964). Still,
+suppose $\rP$ and $\rT$ do exist satisfying \eqref{eqn:parity} and
+\eqref{eqn:timrev}. Applying \eqref{eqn:parity}, \eqref{eqn:timrev} to
+the infinitesimal operators of the Poincar\'e group we get:
+\begin{align*}
+    \rP iH \rP^{-1} &= iH, &
+    \rT iH \rT^{-1} &=-iH.
+\end{align*}
+From these two equations it immediately follows that $\rP$ and $\rT$
+must be respectively unitary and linear, and antiunitary and
+antilinear. 
+
+How do $\rP$ and $\rT$ transform one-particle states?
+It is useful to collect the commutation relations:
+\begin{align}
+    \rP \bm J \rP^{-1} &= +\bm J\label{eqn:PJ}\\
+    \rP \bm K \rP^{-1} &= -\bm K\label{eqn:PK}\\
+    \rP \bm P \rP^{-1} &= -\bm P\label{eqn:PP}\\
+    \rP  H \rP^{-1} &=  H\label{eqn:PH}\\
+    \rT \bm J \rT^{-1} &= -\bm J\label{eqn:TJ}\\
+    \rT \bm K \rT^{-1} &= +\bm K\label{eqn:TK}\\
+    \rT \bm P \rT^{-1} &= -\bm P\label{eqn:TP}\\
+    \rT  H \rT^{-1} &=  H\label{eqn:TH}
+\end{align}
+
+\textbf{Parity, $\bm{M>0}$.}
+$\ket{k\sg}$ are eigenvectors of $\bm P, H, J_3$ with eigenvalues
+$(0,M,\sg)$. Applying $\rP$: takes $0\to -0$, $M\to M$, $\sg\to\sg$;
+thus $\rP\ket{k\sg} = \eta_\sg\ket{k\sg}$ where $\eta_\sg\in U(1)$ is
+a phase. By applying $J_\pm = J_1\pm iJ_2$, we can show that $\eta$ is
+independent of $\sg$. For finite spatial momentum states,
+using $\ms P L(p) \ms P^{-1} = L(\ms P p)$ we get:
+\[\rP \ket{p,\sg} = \eta\ket{\ms Pp,\sg}.\]
+
+\textbf{Time Reversal, $\bm{M>0}$.}
+$\ket{k\sg}$ are eigenvectors of $\bm P, H, J_3$ with eigenvalues
+$(0,M,\sg)$. Applying $\rT$: takes $0\to -0$, $M\to M$, $\sg\to-\sg$;
+thus $\rT\ket{k,\sg} = \zeta_\sg\ket{k,-\sg}$ where $\zeta_\sg$ is
+a phase. For finite spatial momentum states,
+\[\rT \ket{p,\sg} = \zeta(-1)^{j-\sg}\ket{\ms Pp,-\sg}.\]
+
+
+\textbf{Parity, $\bm{M=0}$.}
+Consider $\ket{k\sg}$ with eigenvalue $k=(0,0,\kappa,\kappa)$ under $P^\mu$ and eigenvalue $\sg$ under $J_3$.
+Applying $\rP$, yields $k\to (\ms Pk) = (0,0,-\kappa,\kappa)$, and eigenvalue $\sg$ under $J_3$.
+The helicity $\bm J\cdot \hat k$ changes $-\sg$ (since now it is antiparallel, if it originally was parallel).
+After some analysis we get:
+\[ \rP \ket{p,\sg} = \eta_\sg e^{\mp i\pi\sg}\ket{\ms Pp,\sg},\]
+check Weinberg for the details in the sign. They intrinsically come
+from the fact that $\pi_1(\text{Poincar\'e})=\bZ_2$.
+
+\textbf{Time Reversal, $\bm{M=0}$.}
+Consider $\ket{k\sg}$ with eigenvalue $k=(0,0,\kappa,\kappa)$ under $P^\mu$ and eigenvalue $\sg$ under $J_3$.
+Applying $\rT$, yields $k\to (\ms Pk) = (0,0,-\kappa,\kappa)$, and eigenvalue $-\sg$ under $J_3$.
+The helicity $\bm J\cdot \hat k$ does not change $\sg$.
+After some analysis we get: $\rT \ket{p,\sg} = \zeta_\sg e^{\pm i\pi\sg}\ket{\ms Pp,\sg}$.
+
+\subsubsection{$\rT^2$} 
+Working the action of $\rT^2$ on $\ket{p\sg}$ yields:
+\[ \rT^2\ket{p\sg} = e^{\mp 2i\pi\sg}\ket{p\sg} \equiv (-1)^{2|\sg|}\ket{p\sg} \]
+If a state contains an odd-number of particles with half-integer spin
+there is an overall change of sign: $\rT^2\Psi = -\Psi$. This is
+independent of the direction of spatial momentum and so even in the
+presence of interactions which only obey time-reversal this result is
+preserved.  
+
+If $\Psi$ is an eigenstate, then $\rT\Psi$ is also an eigenstate if
+$[H,\rT]=0$. Moreover, $\rT\Psi\not\propto\Psi$ otherwise:
+$-\Psi=\rT^2\Psi=\rT(\alpha\Psi) = \alpha^*\rT\Psi =
+|\alpha|^2\Psi$, which is a contradiction. This is called a
+\textbf{Kramers degeneracy}.
+%
+If the system had rotational symmetry, then an odd-number of
+half-integer states means a total spin of $2j+1=2,4,6,\dots$, and that
+is an even degeneracy. Kramers result is that even when rotational
+invariance is broken, say by electric fields, there is still a
+two-fold degeneracy as long as the Hamiltonian is invariant under
+$\rT$.
+
+This can rule out electric dipole moments: suppose there is an
+anomalous electric dipole moment of a particle, then in the presence
+of a static electric field, the particle would choose a preferred
+direction thus breaking the spin degeneracy -- contradicting the
+Kramers degeneracy, or more precisely, time-reversal invariance.
+
+
+
+\subsection{Appendix: Projective Representations and Central Extensions}
+%\begin{comment}
+In this subsection, we shall understand where the terms {2-cocycle}
+and {central charge} come from. Skipping this section will not 
+
+\begin{center}
+    \begin{tikzpicture}
+        \draw (0,0) node {Projective Rep};
+        \draw (2.6,0) node {Phase $\phi$};
+        \draw (5.5,0) node {$[\phi]\in H^2(G,U(1))$};
+        \draw (8.5,-0.037) node {$U(1)\rtimes_{\tilde\phi} G$};
+        \draw[->] (1.2,0) -- +(.7,0);
+        \draw[->] (3.3,0) -- +(.7,0);
+        \draw[->] (6.9,0) -- +(.7,0);
+    \end{tikzpicture}
+\end{center}
+
+Let us quickly introduce/review the gadgets from group cohomology that
+will be useful to us. We shall start from cochains.
+\begin{defn}
+    Let $G$ be a group, and $A$ be an Abelian group, which admits a
+    right $G$-action. An \mbox{\textbf{n-cochain}} is a function 
+    \mbox{$f:\overbrace{G\times\cdots\times G}^n\to A$}. 
+    %
+    Let $C^n(G,A)$ refer to the set of all $n$-cochains, and also
+    let's write $C^0(G,A) = A$.
+    %
+    Define a map $d:C^n(G,A)\to C^{n+1}(G,A)$ that takes an $n$-chain
+    $f$ and returns an $n+1$ chain $df$ defined by the formula:
+    \[ df(g_1,\dots,g_{n+1})
+        = f(g_2,\dots,g_{n+1}) 
+        \left(
+        \prod_{i=1}^{n} f(g_1,..,g_{i-1},g_ig_{i+1},g_{i+2},..,g_{n+1})^{(-1)^i}
+        \right)
+        (f(g_1,\dots,g_{n})^{(-1)^{n+1}}\cdot g_{n+1})
+    \]
+    Denote by 
+    \vspace{-.5cm}
+    \begin{align*}
+    Z^n(G,A) &= \ker(d:C^n\to C^{n+1}),         \quad\!\text{the \textbf{n-cocycles},}\\
+    B^n(G,A) &= \mathrm{im}(d:C^{n-1}\to C^n),  \quad\text{the \textbf{n-coboundaries},}\\
+    H^n(G,A) &= Z^n(G,A)/B^n(G,A), \quad\text{the \textbf{n$^\text{th}$-cohomology group}.}
+    \end{align*}
+    Note that $C^n,Z^n,B^n$, and $H^n$ are all groups with the
+    addition endowed from $C^n$.
+\end{defn}
+\begin{example}
+If the group action is trivial, that is $x\cdot g = x$ for any
+$g\in G$ and $x\in A$, then 
+\begin{align*}
+Z^2(G,A) 
+&= \{f(x,y)| f_{y,z} f_{xy,z}^{-1} f_{x,yz} f_{x,y}^{-1} = 1\}\\
+&= \{f(x,y)| f_{y,z}f_{x,yz}  = f_{x,y}f_{xy,z}\}
+\end{align*}
+Compare this with the condition (equation~\ref{eqn:phasecocycle1})
+on the phase $\phi$: $\phi(T_1,T_2T_3) + \phi(T_2,T_3) \equiv
+\phi(T_1T_2,T_3)+\phi(T_1,T_2) \pmod{2\pi}$.  The group $A$ in this
+example is $\bR/2\pi\bZ$ with additive operation. This is where the
+term 2-cocycle comes from. What are the 2-coboundaries? For arbitrary
+$G$ and $A$:
+\begin{align*}
+    B^2(G,A) &= \{f_\lam(x,y) | f(x,y) = \lam(y)\lam(xy)^{-1}\lam(x)^y\}
+\end{align*}
+Comparing this with the ``trivial phases'' in
+example~\ref{example:trivialphase1}, we see these trivial phases are
+precisely the 2-coboundaries. The 2$^\text{nd}$ cohomology group then
+the equivalence class of phases modulo the addition of ``trivial
+phases'' which is precisely what we have been studying above.
+Finally, since $\bR/2\pi\bZ\cong U(1)$ as Abelian groups, it makes no
+difference which Abelian group $A$ we pick when speaking of
+$H^2(G,A)$. \footnote{Our $G$ should be one of the Lorentz group,
+projective Lorentz group, or the image of the Lorentz group under the
+representation.}
+\end{example}
+
+Now that we've seen that each projective representation gives rise to
+a cohomology class, how do these relate to Abelian central extensions?
+
+\begin{defn}
+    Let $G$ and $A$ be groups, with $A$ Abelian. We say that $E$ is an
+    \textbf{group extension of $G$ by $A$} if there is a short exact sequence
+    \[ \begin{tikzcd} 1\arrow[r] &A\arrow[r,"i"] &E\arrow[r,"\pi"] &G\arrow[r] &1
+    \end{tikzcd}\!.\]
+\end{defn}
+\begin{prop} If $1\to A\to E\to G\to 1$ is a group extension with a
+    set-theoretic section $s:G\to E$ satisfying $\pi\circ s =
+    \iden_G$, then there is an action of both $E$ and $G$ on $A$ by
+    conjugation. Moreover $A$ is normal in $E$.  
+\end{prop}
+Morally speaking, we should think of $A$ and $G$ sitting inside of
+$E$. We may abuse notation $i(a) \equiv a$ and $s(g) \equiv g$, but
+not forgetting that $\pi(a) = 0$ and $\pi(g) = g$.  The $E$-action and
+$G$-action are obvious: $e\cdot a = eae^{-1}$ and $g\cdot a=gag^{-1}$. 
+It is easy with this notation to check that these actions are
+well-defined. Here is the formal proof.
+\begin{proof}
+    Let $a\in A, e\in E, g\in G$. Define $e\cdot a \in A$ be the
+    unique element such that $i(e\cdot a) = e\,i(a)\,e^{-1}$.  We may
+    check that $e\,i(a)\,e^{-1}$ is indeed in $i(A)$, because
+    $\pi(e\,i(a)\,e^{-1}) = \pi(e)[\pi\circ i(a)]\pi(e)^{-1} = 1$ and
+    exactness at $E$ shows that $e\,i(a)\,e^{-1}\in \ker\pi = i(A)$.
+    We similarly get a $G$-action on $A$, by writing $g\cdot a =
+    s(g)i(a)s(g)^{-1}$.  
+\end{proof}
+%%%%%%%%%%%%%% MAKE THIS MORE GENERAL: use less sections.
+In fact, we do not need sections for this proof to go through. Exercise.
+%%%%%%%%%%%%%% MAKE THIS MORE GENERAL: use less sections.
+
+\begin{defn}
+    Let $1\to A\to E\to G\to 1$ be an extension of groups. We say
+    $E$ is a \textbf{central extension} if the image of $A$ lies in
+    the centre of $E$. In particular, this means that the $G$-action
+    on $A$ is trivial, because $G$ acts by conjugation and $A$
+    commutes with every element.
+\end{defn}
+
+\begin{center} $\bm{ E \cong A\rtimes_f G }$ \end{center}
+
+Let us assume that $1\to A\to E \to G\to 1$ is a central extension.
+%
+Right now, we do not know what the structure of $E$ is except that
+it's an extension.  Our next goal is to show that $E$ can be
+characterized by a single function $f:G\times G\to A$. 
+%
+Let us choose a set-theoretic section $s:G\to A$, which means that in
+general we have $s(g)s(h)\ne s(gh)$.  To measure how poorly $s$ fails
+to be a homomorphism we may introduce a function $f:G\times G\to A$
+defined by: \[ s(g)s(h) = i(f_{g,h})s(gh). \]
+
+We may now define the map from $\phi:A\times G \to E$ given by
+$(a,g)\mapsto i(a)s(g)$. This is a bijection, as one can easily check.
+Let us put the following group multiplication on $A\times G$:
+\[(a_1,g_1)*(a_2,g_2) = (a_1(g_1\cdot a_2)f_{g_1,g_2}, g_1g_2).\] 
+It is easy to check that this is well-defined and makes $A\times G$
+into a group. In fact, it is chosen so that operation is exactly the
+one needed to make $\phi:A\times G\to E$ an isomorphism:
+\begin{align*}
+\phi(a_1,g_1)\cdot \phi(a_2,g_2)
+&= i(a_1)s(g_1)i(a_2)s(g_2)
+= i(a_1(g_1\cdot a_2))s(g_1)s(g_2)
+= i(a_1(g_1\cdot a_2))i(f_{g_1,g_2})\,s(g_1g_2)\\
+&= (\, a_1(g_1\cdot a_2)f_{g_1,g_2},\,s(g_1g_2)\,)
+\end{align*}
+Associativity of this multiplication imposes the following constraint
+on the function $f$. Remember, since $E$ is a central extension, that
+the $G$-action on $A$ is trivial:
+%   \begin{align*}
+%       [(a_1,g_1)(a_2,g_2)](a_3,g_3) &= (a_1,g_1)[(a_2,g_2)(a_3,g_3)]\\
+%       (a_1(g\cdot a_2)f_{g_1,g_2},g_1g_2)(a_3,g_3) &= (a_1,g_1)(a_2(g_2\cdot a_3)f_{g_2,g_3},g_2g_3)\\
+%       (a_1(g\cdot a_2)f_{g_1,g_2}(g_1g_2\cdot a_3)f_{g_1g_2,g_3},g_1g_2g_3) 
+%       &= (a_1(g_1\cdot [a_2(g_2\cdot a_3)f_{g_2,g_3}])f_{g_1,a_2(g_2\cdot a_3)f_{g_2,g_3}},g_1g_2g_3)
+%   \end{align*}
+%   This is a horrible mess. However, if $A$ is in the centre of $E$,
+%   which in particular implies that the $G$-action is trivial, the
+%   associativity conditions simplifies to:
+\vspace{-0.2cm}
+\begin{align*}
+    [(a_1,g_1)(a_2,g_2)](a_3,g_3) &= (a_1,g_1)[(a_2,g_2)(a_3,g_3)]\\
+    (a_1a_2f_{g_1,g_2},g_1g_2)(a_3,g_3) &= (a_1,g_1)(a_2a_3f_{g_2,g_3},g_2g_3)\\
+    (a_1a_2a_3f_{g_1,g_2}f_{g_1g_2,g_3},g_1g_2g_3) &= (a_1a_2a_3f_{g_2,g_3}f_{g_1,g_2g_3},g_1g_2g_3)\\
+    \implies\qquad\qquad f(g_1,g_2)f(g_1g_2,g_3) &= f(g_2,g_3)f(g_1,g_2g_3),
+\end{align*}
+which says that $f$ is a $2$-cocycle, or in other words $f$ defines an
+equivalence class $[f]\in H^2(G,A)$.
+
+
+%\end{comment}
+
+\begin{comment}
+\subsubsection{Exit: Mathematics.}
+What have we shown with our mathematical interlude?
+
+\[
+\begin{tikzcd}
+    \text{Projective representation}\arrow[r]
+    & \text{Phase $\phi$}\arrow[r] 
+    & \text{$[\phi] \in
+    H^2(G,\bR/2\pi\bZ)$}\arrow[r,semithick,blue,dashed]
+    & \colb{ U(1)\rtimes_{\phi} G}
+\end{tikzcd}
+\]
+
+For every projective representation, we have shown that we may
+associate a cohomology class $[\phi]$. If this class is cohomologous
+to $[0]$, then we may redefine this projective representation to get a
+linear representation. If not, then $[\phi]$ determines uniquely a
+central extension $U(1)\rtimes_\phi G$. It is a fact that we may lift
+the projective representation from $G\to U(V)$ to a linear
+representation on $U(1)\rtimes_\phi G$. 
+
+The question whether or not there exist \emph{any} intrinsically
+projective representations of $G$ reduces to the question of computing
+$H^2(G,A)$. In our case, $G$ is the inhomogeneous orthochronous
+Lorentz group whose complexification is $\SL_2(\bC)/\bZ_2$. 
+%
+The computation of $H^2(\text{inhom. ortho. Lorentz},U(1)\,)$ can be done\dots
+by looking at $\pi_1( \SL_2(\bC)/\bZ_2 )$ !?
+%
+
+\end{comment}
+
+
+
+%\input{FreeFields}
+%\input{Scattering}
+%\input{Radiative-corrections}
+
+
+
+
+
+\end{document}
